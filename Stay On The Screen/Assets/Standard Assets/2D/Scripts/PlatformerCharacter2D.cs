@@ -5,11 +5,17 @@ namespace UnityStandardAssets._2D
 {
     public class PlatformerCharacter2D : MonoBehaviour
     {
-        [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-        [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
-        [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
-        [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
-        [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+        [SerializeField]
+        private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
+        [SerializeField]
+        private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
+        [Range(0, 1)]
+        [SerializeField]
+        private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
+        [SerializeField]
+        private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
+        [SerializeField]
+        private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         private bool m_Grounded;            // Whether or not the player is grounded.
@@ -30,10 +36,9 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             m_Grounded = false;
-            Vector2 bottom = this.transform.position;
-            bottom = new Vector2(bottom.x,bottom.y - 2);
-            RaycastHit2D hit = Physics2D.BoxCast(bottom,new Vector2(4,0.1f),0,new Vector2(0,-1),0.1f,LayerMask.NameToLayer("Floor"),-Mathf.Infinity, Mathf.Infinity);
-            if(hit.collider != null){
+            RaycastHit2D hit = Physics2D.BoxCast(m_GroundCheck.position, new Vector2(0.99f, 0.1f), this.transform.eulerAngles.z, new Vector2(0, -1), 0, 1 << LayerMask.NameToLayer("Floor"), -Mathf.Infinity, Mathf.Infinity);
+            if (hit.collider != null)
+            {
                 m_Grounded = true;
                 Debug.Log("Grounded");
                 return;
@@ -49,7 +54,7 @@ namespace UnityStandardAssets._2D
             if (m_Grounded || m_AirControl)
             {
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !m_FacingRight)
@@ -57,7 +62,7 @@ namespace UnityStandardAssets._2D
                     // ... flip the player.
                     Flip();
                 }
-                    // Otherwise if the input is moving the player left and the player is facing right...
+                // Otherwise if the input is moving the player left and the player is facing right...
                 else if (move < 0 && m_FacingRight)
                 {
                     // ... flip the player.
@@ -65,7 +70,7 @@ namespace UnityStandardAssets._2D
                 }
             }
             // If the player should jump...
-            if (m_Grounded && jump )
+            if (m_Grounded && jump)
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
