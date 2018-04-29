@@ -17,7 +17,6 @@ namespace UnityStandardAssets._2D
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         private bool m_Grounded;            // Whether or not the player is grounded.
-        private Transform m_CeilingCheck;   // A position marking where to check for ceilings
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
@@ -25,7 +24,6 @@ namespace UnityStandardAssets._2D
         {
             // Setting up references.
             m_GroundCheck = transform.Find("GroundCheck");
-            m_CeilingCheck = transform.Find("CeilingCheck");
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
         }
@@ -34,7 +32,7 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             m_Grounded = false;
-            RaycastHit2D hit = Physics2D.BoxCast(m_GroundCheck.position, new Vector2(0.99f, 0.1f), this.transform.eulerAngles.z, new Vector2(0, -1), 0, 1 << LayerMask.NameToLayer("Floor"), -Mathf.Infinity, Mathf.Infinity);
+            RaycastHit2D hit = Physics2D.BoxCast(m_GroundCheck.position, new Vector2(0.99f, 0.1f), this.transform.eulerAngles.z, new Vector2(0, -1), 0, 1 << LayerMask.NameToLayer("Platform"), -Mathf.Infinity, Mathf.Infinity);
             if (hit.collider != null)
             {
                 m_Grounded = true;
