@@ -11,8 +11,6 @@ namespace UnityStandardAssets._2D
         private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
         [Range(0, 1)]
         [SerializeField]
-        private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
-        [SerializeField]
         private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField]
         private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
@@ -47,7 +45,7 @@ namespace UnityStandardAssets._2D
         }
 
 
-        public void Move(float move, bool crouch, bool jump)
+        public void Move(float move, bool jump)
         {
 
             //only control the player if grounded or airControl is turned on
