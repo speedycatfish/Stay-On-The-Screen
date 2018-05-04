@@ -57,9 +57,12 @@ namespace UnityStandardAssets._2D
                 RaycastHit2D hitRight = Physics2D.BoxCast(RightCheck.position, new Vector2(0.1f, 0.99f), 0, new Vector2(1, 0), 0, 1 << LayerMask.NameToLayer("Platform"), -Mathf.Infinity, Mathf.Infinity);
                 RaycastHit2D hitLeft = Physics2D.BoxCast(LeftCheck.position, new Vector2(0.1f, 0.99f), 0, new Vector2(-1, 0), 0, 1 << LayerMask.NameToLayer("Platform"), -Mathf.Infinity, Mathf.Infinity);
 
-                if(hitRight.collider != null || hitLeft.collider != null){
+                if (hitRight.collider != null || hitLeft.collider != null)
+                {
                     m_Rigidbody2D.sharedMaterial = Slippery;
-                } else{ 
+                }
+                else
+                {
                     m_Rigidbody2D.sharedMaterial = null;
                 }
                 // Move the character
@@ -76,6 +79,6 @@ namespace UnityStandardAssets._2D
         }
 
 
- 
+
     }
 }

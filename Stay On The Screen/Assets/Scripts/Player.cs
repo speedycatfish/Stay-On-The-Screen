@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
     [SerializeField]
     private GameManager GM;
     [SerializeField]
@@ -16,7 +17,8 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Transform GroundCheck;
 
-	void Update () {
+    void Update()
+    {
         Vector3 viewPos = Cam.WorldToViewportPoint(RightCheck.position);
         if (viewPos.x < 0)
         {
@@ -37,6 +39,6 @@ public class Player : MonoBehaviour {
         {
             GM.PlayerDeath();
         }
-	}
+    }
 
 }
