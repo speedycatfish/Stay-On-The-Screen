@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager GM;
-
+    public static GameManager GM;
+    public void Awake()
+    {Matrix4x4
+        if(GM == null){
+            GM = FindObjectOfType<GameManager>();
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
