@@ -6,8 +6,9 @@ public class Spike : MonoBehaviour
 {
     public static GameManager GM;
     public void Awake()
-    {Matrix4x4
-        if(GM == null){
+    {
+        if (GM == null)
+        {
             GM = FindObjectOfType<GameManager>();
         }
     }
