@@ -8,6 +8,6 @@ public class AutoScroll : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+        this.transform.position += new Vector3(speed * Time.fixedDeltaTime, 0, 0);
     }
 }
