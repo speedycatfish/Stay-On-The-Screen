@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        bool[] progress = PlayerPrefsX.GetBoolArray("progress");
+        progress[SceneManager.GetActiveScene().buildIndex - 2] = true;
+        PlayerPrefsX.SetBoolArray("progress", progress);
         SceneManager.LoadScene(nextSceneIndex);
     }
     public void GoLevelSelect()
