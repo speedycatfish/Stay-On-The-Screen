@@ -8,9 +8,13 @@ public class LevelSelect : MonoBehaviour
     public Button[] buttonsarr;
     Color unlocked = new Color32(128, 128, 128, 255);
     Color locked = new Color32(10, 10, 10, 255);
+    GameObject confirm;
+    bool activated = false;
     public void Start()
     {
         bool[] progress = PlayerPrefsX.GetBoolArray("progress", false, SceneManager.sceneCountInBuildSettings - 2);
+        confirm = GameObject.Find("Confirmation");
+        confirm.SetActive(false);
         PlayerPrefsX.SetBoolArray("progress", progress);
         for (int i = 0; i < buttonsarr.Length; i++)
         {
@@ -36,6 +40,12 @@ public class LevelSelect : MonoBehaviour
         bool[] progress = new bool[SceneManager.sceneCountInBuildSettings - 2];
         PlayerPrefsX.SetBoolArray("progress", progress);
         Start();
+    }
+    public void ActivateConfirmation()
+    {
+        Debug.Log("hi");
+        activated = !activated;
+        confirm.SetActive(activated);
     }
 }
 
