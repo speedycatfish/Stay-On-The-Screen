@@ -12,9 +12,13 @@ public class LevelSelect : MonoBehaviour
     bool activated = false;
     public void Start()
     {
-        bool[] progress = PlayerPrefsX.GetBoolArray("progress", false, SceneManager.sceneCountInBuildSettings - 2);
         confirm = GameObject.Find("Confirmation");
         confirm.SetActive(false);
+        bool[] progress = PlayerPrefsX.GetBoolArray("progress", false, SceneManager.sceneCountInBuildSettings - 2);
+        if (progress.Length < buttonsarr.Length)
+        {
+            progress = updateLevelCount(progress, buttonsarr.Length);
+        }
         PlayerPrefsX.SetBoolArray("progress", progress);
         for (int i = 0; i < buttonsarr.Length; i++)
         {
@@ -29,6 +33,15 @@ public class LevelSelect : MonoBehaviour
                 buttonsarr[i].GetComponent<Image>().color = locked;
             }
         }
+    }
+    bool[] updateLevelCount(bool[] progress, int newlength)
+    {
+        bool[] newprogress = new bool[newlength];
+        for (int i = 0; i < progress.Length; i++)
+        {
+            newprogress[i] = progress[i];
+        }
+        return newprogress;
     }
     public void SelectLevel(int i)
     {
